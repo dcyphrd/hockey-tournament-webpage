@@ -234,7 +234,7 @@ If you want to change the color scheme, search-and-replace these hex values acro
 
 ## Tips and gotchas
 
-- **Edit in Sports Engine for live updates.** During the tournament, edit the HTML code block directly in Sports Engine. You don't need to push to GitHub, rebuild, or redeploy anything. Commit your final version to GitHub after the tournament for archival.
+- **Edit in Sports Engine for live updates.** During the tournament, edit the HTML code block by copy/pasting out of the website and into an editor like vsCode or Notepad++. You don't need to push to GitHub, rebuild, or redeploy anything. Commit your final version to GitHub after the tournament for archival.
 - **Careful with copy-paste.** Sports Engine's HTML editor sometimes strips or modifies tags. If the formatting looks broken after pasting, check that the `<style>` block at the top survived intact.
 - **Don't add `<html>`, `<head>`, or `<body>` tags.** These are HTML fragments meant to be embedded inside an existing page. Sports Engine provides the outer page wrapper.
 - **Test on mobile.** Most people checking scores at the rink will be on their phones. The CSS is built to handle this, but always preview after pasting.
