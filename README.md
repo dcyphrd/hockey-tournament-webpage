@@ -137,7 +137,7 @@ The Rec and Intermediate levels may not have the same number of teams each year.
 
 ## How to update scores during the tournament
 
-This is the part you'll be doing at the rink on your phone or laptop. You can edit the HTML directly in Sports Engine's code block editor — you don't need to go through GitHub for live updates.
+This is the part you'll be doing at the rink on your phone or laptop. You can edit the HTML directly in Sports Engine's code block editor — you don't need to go through GitHub for live updates. That said, it's best if you copy the code out of the webpage, into an editor like vsCode, make changes, then copy/paste back into the webpage. Otherwise you risk breaking formatting in that tiny text box the webstie gives you.
 
 ### Updating game scores
 
