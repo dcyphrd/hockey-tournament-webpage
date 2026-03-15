@@ -6,7 +6,7 @@ HTML bracket and standings pages for the Anchorage Women's Hockey League (AWHL) 
 
 ## What's in this repo
 
-Each skill level gets **two pages** — a division header and a full tournament tracker.
+Each skill level gets **two pages**: a division header and a full tournament tracker.
 
 | File | Purpose |
 |------|---------|
@@ -26,7 +26,7 @@ The `XX-XX` prefix is the season (e.g., `25-26` for the 2025–26 season). Renam
 3. Copy the **entire contents** of the relevant `.html` file and paste it into that code block.
 4. Save / publish the page.
 
-That's it — the HTML includes all its own CSS styling inline, so there are no external files or scripts to worry about. It's 100% static HTML and CSS.
+That's it; the HTML includes all its own CSS styling inline, so there are no external files or scripts to worry about. It's 100% static HTML and CSS.
 
 ---
 
@@ -47,8 +47,8 @@ Duplicate all four files and rename them with the new season prefix:
 
 These are the simpler files. Open each one and change:
 
-- **Title text** — Update the year in the `<tr class="title-row">` (e.g., "2027 AWHL Rec Tournament Divisions").
-- **Team names** — In the `<tr class="team-row">`, replace each team name. Teams are separated by `<br>` tags within each division cell.
+- **Title text**: Update the year in the `<tr class="title-row">` (e.g., "2027 AWHL Rec Tournament Divisions").
+- **Team names**: In the `<tr class="team-row">`, replace each team name. Teams are separated by `<br>` tags within each division cell.
 
 Example — the Rec brackets file has a structure like this:
 
