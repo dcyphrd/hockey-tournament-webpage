@@ -1,0 +1,407 @@
+<!--
+  ============================================================
+  AWHL REC TOURNAMENT BRACKET
+  2025-26 Season
+  ============================================================
+
+  yo diva! here's everything you need to know to update this page:
+
+  HOW THIS PAGE IS ORGANIZED:
+    1. Game Schedule (top) — update scores as games finish
+    2. Division Standings — update points, GF (goals for), GA (goals against), and place
+    3. Playoff Bracket (bottom) — fill in team names as they qualify, then scores
+
+  HOW TO UPDATE SCORES IN THE SCHEDULE:
+    Find the game row and put the number between the empty <td></td> score cells.
+    Each team has one score cell. Before a game:
+      <td></td>
+    After a game (example: home team scored 4):
+      <td>4</td>
+
+  HOW TO UPDATE STANDINGS:
+    Each row has cells for G1, G2, G3, G4 (points earned that game), PTS, GF, GA, and Place.
+    For each game result, put the points earned (Win=2, Tie=1, Loss=0):
+      <td>2</td>   ← won that game
+      <td>1</td>   ← tied
+      <td>0</td>   ← lost
+    Then fill in total PTS, goals for, goals against, and finishing place (1st, 2nd, etc.)
+
+  HOW TO UPDATE THE PLAYOFF BRACKET:
+    Once division play is done, find the playoff boxes near the bottom.
+    Replace "1st Place American", "2nd Place National", etc. with the actual team names.
+    After games are played, put scores in the score boxes.
+
+  WINNER STYLING TIP:
+    Once a playoff game is done, add class="winner" to the winning team's box:
+      BEFORE: <div class="matchup-team">Fireweed</div>
+      AFTER:  <div class="matchup-team winner">Fireweed</div>
+    It'll turn dark navy to make the winner stand out!
+
+  DIVISIONS:
+    - AMERICAN (Division 1): Fireweed, Northern Lights, Weaver Brothers
+    - NATIONAL (Division 2): Alpenglow, Champions Choice, Play It Again Sports, Rebound
+
+  PLAYOFF FORMAT:
+    Game 13: Semi-Final #1  — 1st American vs 2nd National
+    Game 14: Semi-Final #2  — 1st National vs 2nd American
+    Game 15: Consolation    — 3rd National vs 4th National
+    Game 16: Championship   — Winner SF#1 vs Winner SF#2
+
+  ============================================================
+-->
+
+<style>
+  /* ---- Base Layout ---- */
+  .awhl-bracket {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #222;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 4px;
+  }
+
+  /* ---- Headers ---- */
+  .awhl-bracket h2 {
+    text-align: center;
+    font-size: 20px;
+    margin: 24px 0 4px;
+    padding: 8px;
+    background: #1a1a2e;
+    color: #fff;
+    border-radius: 6px;
+  }
+  .awhl-bracket h3 {
+    text-align: center;
+    font-size: 15px;
+    margin: 16px 0 2px;
+    padding: 6px;
+    background: #16213e;
+    color: #fff;
+    border-radius: 4px;
+  }
+  .awhl-bracket .section-note {
+    font-size: 11px;
+    color: #555;
+    text-align: center;
+    margin: 4px 0 8px;
+    font-style: italic;
+  }
+
+  /* ---- Tables (shared) ---- */
+  .awhl-bracket table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 12px;
+    table-layout: fixed;
+  }
+  .awhl-bracket th {
+    background: #0f3460;
+    color: #fff;
+    padding: 6px 4px;
+    text-align: center;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+  .awhl-bracket td {
+    border: 1px solid #ccc;
+    padding: 5px 4px;
+    text-align: center;
+    font-size: 12px;
+    word-wrap: break-word;
+  }
+  .awhl-bracket tr:nth-child(even) { background: #f4f4f8; }
+  .awhl-bracket tr:nth-child(odd)  { background: #fff; }
+
+  /* ---- Schedule Table Column Widths ---- */
+  /* Tuned so all 8 columns fit without horizontal scrolling */
+  .awhl-bracket .sched-table { table-layout: fixed; width: 100%; }
+  .awhl-bracket .sched-table .col-game  { width: 4%; }
+  .awhl-bracket .sched-table .col-day   { width: 9%; }
+  .awhl-bracket .sched-table .col-time  { width: 10%; }
+  .awhl-bracket .sched-table .col-rink  { width: 7%; }
+  .awhl-bracket .sched-table .col-team  { width: 25%; }
+  .awhl-bracket .sched-table .col-score { width: 7%; }
+
+  /* Prevent the whole wrapper from causing horizontal scroll */
+  .awhl-bracket { overflow-x: hidden; }
+
+  /* Playoff game rows get a slightly different look so they stand out */
+  .awhl-bracket tr.playoff-row {
+    background: #eef2ff !important;
+    font-weight: bold;
+  }
+  .awhl-bracket tr.playoff-row td {
+    border-top: 2px solid #0f3460;
+  }
+
+  /* ---- Standings Table ---- */
+  .awhl-bracket .stand-table .col-team-s { width: 28%; }
+  .awhl-bracket .stand-table td:first-child {
+    text-align: left;
+    padding-left: 6px;
+    font-weight: bold;
+  }
+
+  /* ---- Playoff Boxes ---- */
+  .awhl-bracket .playoff-box {
+    border: 2px solid #0f3460;
+    border-radius: 6px;
+    padding: 8px;
+    margin: 8px 0;
+    background: #f9f9ff;
+  }
+  .awhl-bracket .playoff-title {
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 4px;
+    color: #0f3460;
+  }
+  .awhl-bracket .playoff-detail {
+    font-size: 11px;
+    text-align: center;
+    color: #555;
+    margin-bottom: 4px;
+  }
+  .awhl-bracket .matchup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
+  }
+  .awhl-bracket .matchup-team {
+    flex: 1;
+    padding: 6px 4px;
+    background: #e8e8f0;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 12px;
+    min-width: 0;
+    word-wrap: break-word;
+  }
+  /* Add class="winner" to the winning team's div to highlight them */
+  .awhl-bracket .matchup-team.winner {
+    background: #0f3460;
+    color: #fff;
+  }
+  .awhl-bracket .matchup-score {
+    width: 36px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .awhl-bracket .matchup-vs {
+    flex-shrink: 0;
+    font-size: 11px;
+    color: #888;
+  }
+
+  /* Gold border for the championship game */
+  .awhl-bracket .champ-box {
+    border: 3px solid #d4af37;
+    background: #fffbe6;
+  }
+
+  /* Grey for the consolation game */
+  .awhl-bracket .consolation-box {
+    border: 2px solid #888;
+    background: #f5f5f5;
+  }
+
+  /* ---- Mobile ---- */
+  @media (max-width: 500px) {
+    .awhl-bracket h2 { font-size: 16px; }
+    .awhl-bracket h3 { font-size: 13px; }
+    /* Shrink everything in the schedule table to fit 8 columns */
+    .awhl-bracket .sched-table th,
+    .awhl-bracket .sched-table td { font-size: 9px; padding: 4px 1px; }
+    /* Non-schedule tables can be a bit more generous */
+    .awhl-bracket .stand-table th,
+    .awhl-bracket .stand-table td { font-size: 10px; padding: 4px 2px; }
+    .awhl-bracket .matchup-team { font-size: 11px; padding: 4px 2px; }
+    /* Hide the rink column on very small screens to free up space */
+    .awhl-bracket .sched-table .col-rink,
+    .awhl-bracket .sched-table td:nth-child(4) { display: none; }
+  }
+</style>
+
+<div class="awhl-bracket">
+
+<h2>2026 AWHL Rec Tournament</h2>
+<p class="section-note">Win = 2 pts &bull; Tie = 1 pt &bull; Loss = 0 pts</p>
+
+
+<!-- ============================================================
+     GAME SCHEDULE
+     HOW TO UPDATE: Find the game row, put the score in the empty <td></td> after the team name.
+     Example — before: <td>Fireweed</td><td></td>
+               after:  <td>Fireweed</td><td>4</td>
+     ============================================================ -->
+<h3>Rec Game Schedule</h3>
+<table class="sched-table">
+  <thead>
+    <tr>
+      <th class="col-game">#</th>
+      <th class="col-day">Day</th>
+      <th class="col-time">Time</th>
+      <th class="col-rink">Rink</th>
+      <th class="col-team">Home</th>
+      <th class="col-score">Score</th>
+      <th class="col-team">Away</th>
+      <th class="col-score">Score</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- TUESDAY 3/17 — First puck drops! -->
+    <tr><td>1</td><td>Tue 3/17</td><td>5:30 PM</td><td>DA2</td><td>Weaver Brothers</td>    <td></td><td>Northern Lights</td>      <td></td></tr>
+    <tr><td>2</td><td>Tue 3/17</td><td>5:45 PM</td><td>DA1</td><td>Champions Choice</td>    <td></td><td>Rebound</td>              <td></td></tr>
+    <tr><td>3</td><td>Tue 3/17</td><td>7:00 PM</td><td>DA1</td><td>Play It Again Sports</td><td></td><td>Alpenglow</td>            <td></td></tr>
+
+    <!-- WEDNESDAY 3/18 -->
+    <tr><td>4</td><td>Wed 3/18</td><td>9:00 PM</td><td>UAA</td><td>Northern Lights</td>     <td></td><td>Fireweed</td>             <td></td></tr>
+
+    <!-- THURSDAY 3/19 -->
+    <tr><td>5</td><td>Thu 3/19</td><td>5:30 PM</td><td>DA2</td><td>Alpenglow</td>           <td></td><td>Champions Choice</td>    <td></td></tr>
+    <tr><td>6</td><td>Thu 3/19</td><td>6:15 PM</td><td>BB2</td><td>Fireweed</td>            <td></td><td>Weaver Brothers</td>     <td></td></tr>
+    <tr><td>7</td><td>Thu 3/19</td><td>6:45 PM</td><td>DA2</td><td>Rebound</td>             <td></td><td>Play It Again Sports</td><td></td></tr>
+
+    <!-- FRIDAY 3/20 -->
+    <tr><td>8</td><td>Fri 3/20</td><td>5:45 PM</td><td>UAA</td><td>Northern Lights</td>     <td></td><td>Weaver Brothers</td>     <td></td></tr>
+
+    <!-- SATURDAY 3/21 -->
+    <tr><td>9</td> <td>Sat 3/21</td><td>12:00 PM</td><td>DA2</td><td>Weaver Brothers</td>    <td></td><td>Fireweed</td>             <td></td></tr>
+    <tr><td>10</td><td>Sat 3/21</td><td>2:45 PM</td> <td>UAA</td><td>Champions Choice</td>   <td></td><td>Play It Again Sports</td><td></td></tr>
+    <tr><td>11</td><td>Sat 3/21</td><td>4:00 PM</td> <td>UAA</td><td>Rebound</td>            <td></td><td>Alpenglow</td>            <td></td></tr>
+    <tr><td>12</td><td>Sat 3/21</td><td>5:15 PM</td> <td>UAA</td><td>Fireweed</td>           <td></td><td>Northern Lights</td>      <td></td></tr>
+
+    <!-- SUNDAY 3/22 — Playoff games! Replace placeholder names with real teams once division play wraps up. -->
+    <tr class="playoff-row"><td><b>13</b></td><td>Sun 3/22</td><td>8:30 AM</td> <td>UAA</td><td>1st Place American</td><td></td><td>2nd Place National</td><td></td></tr>
+    <tr class="playoff-row"><td><b>14</b></td><td>Sun 3/22</td><td>10:00 AM</td><td>UAA</td><td>1st Place National</td><td></td><td>2nd Place American</td><td></td></tr>
+    <tr class="playoff-row"><td><b>15</b></td><td>Sun 3/22</td><td>11:30 AM</td><td>UAA</td><td>3rd Place National</td><td></td><td>4th Place National</td><td></td></tr>
+    <tr class="playoff-row"><td><b>16</b></td><td>Sun 3/22</td><td>5:00 PM</td> <td>DA1</td><td>Winner SF #1</td>       <td></td><td>Winner SF #2</td>       <td></td></tr>
+
+  </tbody>
+</table>
+
+
+<!-- ============================================================
+     DIVISION 1 — AMERICAN STANDINGS
+     3 teams, each plays 4 games (double round-robin)
+     HOW TO UPDATE: Fill in points per game (2=win, 1=tie, 0=loss),
+     then update PTS total, GF (goals for), GA (goals against), and Place.
+     ============================================================ -->
+<h3>Rec Division 1 &mdash; American</h3>
+<p class="section-note">Double round-robin (4 games) &bull; Top 2 advance to semi-finals</p>
+<table class="stand-table">
+  <thead>
+    <tr>
+      <th class="col-team-s">Team</th>
+      <th>G1</th><th>G2</th><th>G3</th><th>G4</th>
+      <th>PTS</th><th>GF</th><th>GA</th><th>Place</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Update after each game! -->
+    <tr><td>Fireweed</td>       <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Northern Lights</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Weaver Brothers</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  </tbody>
+</table>
+
+
+<!-- ============================================================
+     DIVISION 2 — NATIONAL STANDINGS
+     4 teams, each plays 3 games (round-robin)
+     Same deal — fill in points per game and totals as you go.
+     3rd and 4th place teams play the consolation game on Sunday.
+     ============================================================ -->
+<h3>Rec Division 2 &mdash; National</h3>
+<p class="section-note">Round-robin (3 games) &bull; Top 2 advance to semi-finals &bull; 3rd &amp; 4th play consolation</p>
+<table class="stand-table">
+  <thead>
+    <tr>
+      <th class="col-team-s">Team</th>
+      <th>G1</th><th>G2</th><th>G3</th><th>G4</th>
+      <th>PTS</th><th>GF</th><th>GA</th><th>Place</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Update after each game! G4 will stay blank since National only plays 3 games each. -->
+    <tr><td>Alpenglow</td>          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Champions Choice</td>   <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Play It Again Sports</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Rebound</td>            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  </tbody>
+</table>
+
+
+<!-- ============================================================
+     PLAYOFF BRACKET — SUNDAY MARCH 22
+     Once division play wraps up, replace the placeholder team names
+     with the actual finishers. Then fill in scores after each game.
+
+     WINNER STYLING TIP: Once a game is done, add class="winner" to
+     the winning team's div — it'll turn dark navy!
+     Example: <div class="matchup-team winner">Fireweed</div>
+     ============================================================ -->
+<h3>Rec Playoffs &mdash; Sunday, March 22</h3>
+
+<!-- GAME 13: SEMI-FINAL #1 -->
+<div class="playoff-box">
+  <div class="playoff-title">Game 13: Semi-Final #1</div>
+  <div class="playoff-detail">8:30 AM &bull; UAA</div>
+  <div class="matchup">
+    <!-- Replace "1st Place American" with the actual team name when known -->
+    <div class="matchup-team">1st Place American</div>
+    <div class="matchup-score"></div><!-- put score here, like: 4 -->
+    <div class="matchup-vs">vs</div>
+    <div class="matchup-score"></div><!-- put score here -->
+    <div class="matchup-team">2nd Place National</div>
+  </div>
+</div>
+
+<!-- GAME 14: SEMI-FINAL #2 -->
+<div class="playoff-box">
+  <div class="playoff-title">Game 14: Semi-Final #2</div>
+  <div class="playoff-detail">10:00 AM &bull; UAA</div>
+  <div class="matchup">
+    <div class="matchup-team">1st Place National</div>
+    <div class="matchup-score"></div>
+    <div class="matchup-vs">vs</div>
+    <div class="matchup-score"></div>
+    <div class="matchup-team">2nd Place American</div>
+  </div>
+</div>
+
+<!-- GAME 15: CONSOLATION (3rd vs 4th National) -->
+<div class="playoff-box consolation-box">
+  <div class="playoff-title">Game 15: Consolation</div>
+  <div class="playoff-detail">11:30 AM &bull; UAA</div>
+  <div class="matchup">
+    <div class="matchup-team">3rd Place National</div>
+    <div class="matchup-score"></div>
+    <div class="matchup-vs">vs</div>
+    <div class="matchup-score"></div>
+    <div class="matchup-team">4th Place National</div>
+  </div>
+</div>
+
+<!-- GAME 16: CHAMPIONSHIP — the big one! -->
+<div class="playoff-box champ-box">
+  <div class="playoff-title">&#127942; Game 16: Championship</div>
+  <div class="playoff-detail">5:00 PM &bull; DA1</div>
+  <div class="matchup">
+    <div class="matchup-team">Winner SF #1</div>
+    <div class="matchup-score"></div>
+    <div class="matchup-vs">vs</div>
+    <div class="matchup-score"></div>
+    <div class="matchup-team">Winner SF #2</div>
+  </div>
+</div>
+
+</div>
+<!-- end .awhl-bracket -->
