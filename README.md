@@ -99,7 +99,7 @@ Make sure the score cells are **empty** for the new season:
 </tr>
 ```
 
-Note: The Rec tracker uses plain `<td></td>` for scores. The Intermediate tracker uses `<td class="score"></td>`. Either approach works — the `class="score"` just adds bold styling.
+Both the Rec and Intermediate trackers use `<td class="score"></td>` for score cells. This gives scores bold, slightly larger styling so they stand out at a glance.
 
 **d) Add or remove game rows as needed.**
 If the schedule has more or fewer games than last year, just copy/paste or delete `<tr>...</tr>` rows. Keep the playoff games (marked with `class="playoff-row"`) at the bottom.
@@ -141,7 +141,7 @@ This is the part you'll be doing at the rink on your phone or laptop. You can ed
 
 ### Updating game scores
 
-Find the row for the game that just finished. Put the score between the empty `<td>` tags (or `<td class="score">` tags for Intermediate):
+Find the row for the game that just finished. Put the score between the `<td class="score">` tags:
 
 **Before:**
 ```html
@@ -197,7 +197,7 @@ This turns the winner's box dark navy with white text (or gold-bordered for the 
 |-------|-------------|
 | `.sched-table` | Game schedule table — fixed column widths tuned to fit 8 columns without scrolling |
 | `.stand-table` | Division standings table |
-| `.score` | Bold styling on score cells (used in Intermediate tracker) |
+| `.score` | Bold styling on score cells (used in both Rec and Intermediate trackers) |
 | `.playoff-row` | Blue-tinted background on playoff game rows in the schedule |
 | `.playoff-box` | Bordered box for each playoff matchup |
 | `.champ-box` | Gold border for the championship game |
@@ -208,7 +208,7 @@ This turns the winner's box dark navy with white text (or gold-bordered for the 
 | `.section-note` | Small italic text below section headers (e.g., "Win = 2 pts") |
 
 ### Mobile responsiveness
-All pages include `@media` queries that kick in around 500–540px wide. On small screens:
+All pages include `@media` queries that kick in at **540px wide**. On small screens:
 - Font sizes shrink
 - The **Rink** column hides automatically in the schedule table
 - Playoff boxes compact slightly
