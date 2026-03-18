@@ -2,6 +2,7 @@
   ============================================================
   AWHL INTERMEDIATE TOURNAMENT BRACKET
   2025-26 Season
+  https://github.com/dcyphrd/hockey-tournament-webpage
   ============================================================
 
   yo! here's everything you need to know to update this page:
@@ -93,14 +94,14 @@
   .awhl-int th {
     background: #0f3460;
     color: #fff;
-    padding: 6px 3px;
+    padding: 6px 4px;
     text-align: center;
     font-size: 11px;
     white-space: nowrap;
   }
   .awhl-int td {
     border: 1px solid #ccc;
-    padding: 5px 3px;
+    padding: 5px 4px;
     text-align: center;
     font-size: 12px;
     word-wrap: break-word;
@@ -117,14 +118,20 @@
   }
 
   /* ---- Schedule Table Column Widths ---- */
-  /* Tuned so all 8 columns fit without horizontal scrolling */
-  .awhl-int .sched-table { table-layout: fixed; width: 100%; }
+  /* min-width keeps columns readable; scroll-wrap handles overflow on narrow screens */
+  .awhl-int .sched-table { table-layout: fixed; width: 100%; min-width: 500px; }
   .awhl-int .sched-table .col-num  { width: 4%; }
   .awhl-int .sched-table .col-day  { width: 9%; }
   .awhl-int .sched-table .col-time { width: 10%; }
   .awhl-int .sched-table .col-rink { width: 7%; }
   .awhl-int .sched-table .col-team { width: 25%; }
   .awhl-int .sched-table .col-score{ width: 7%; }
+
+  /* Scroll wrapper — only the schedule table scrolls horizontally */
+  .awhl-int .scroll-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 
   /* Prevent the whole wrapper from causing horizontal scroll */
   .awhl-int { overflow-x: hidden; }
@@ -146,7 +153,7 @@
     font-size: 12px;
   }
   .awhl-int .stand-table .col-team { width: 26%; }
-  .awhl-int .stand-table .col-pts  { width: 8%; font-weight: bold; color: #0b2545; }
+  .awhl-int .stand-table .col-pts  { width: 8%; }
 
   /* ---- Playoff Boxes ---- */
   .awhl-int .playoff-box {
@@ -224,19 +231,15 @@
   @media (max-width: 540px) {
     .awhl-int h2  { font-size: 15px; }
     .awhl-int h3  { font-size: 12px; }
-    /* Shrink everything in the schedule table to fit 8 columns */
+    /* Schedule table scrolls, so font can stay comfortable */
     .awhl-int .sched-table th,
-    .awhl-int .sched-table td { font-size: 9px; padding: 4px 1px; }
-    /* Non-schedule tables can be a bit more generous */
+    .awhl-int .sched-table td { font-size: 10px; padding: 4px 2px; }
     .awhl-int .stand-table th,
     .awhl-int .stand-table td { font-size: 10px; padding: 4px 2px; }
     .awhl-int td.score { font-size: 12px; }
     .awhl-int .matchup-team  { font-size: 10px; padding: 6px 3px; }
     .awhl-int .matchup-score { font-size: 15px; width: 28px; }
     .awhl-int .playoff-title { font-size: 11px; }
-    /* Hide the rink column on very small screens to free up space */
-    .awhl-int .sched-table .col-rink,
-    .awhl-int .sched-table td:nth-child(4) { display: none; }
   }
 </style>
 
@@ -251,6 +254,7 @@
        Example:  <td class="score">4</td>
        ============================================================ -->
   <h3>Game Schedule</h3>
+  <div class="scroll-wrap">
   <table class="sched-table">
     <thead>
       <tr>
@@ -268,7 +272,7 @@
 
       <!-- TUESDAY 3/17 -->
       <tr><td>2</td><td>Tue 3/17</td><td>7:30 PM</td><td>BB2</td>    <td>House of Green Ho's</td>   <td class="score"></td><td>Lickety Splits</td>          <td class="score"></td></tr>
-      <tr><td>3</td><td>Tue 3/17</td><td>8:30 PM</td><td>UAA</td>    <td>Team Spirit</td>            <td class="score">3</td><td>Waterworks</td>              <td class="score">1</td></tr>
+      <tr><td>3</td><td>Tue 3/17</td><td>8:30 PM</td><td>UAA</td>    <td>Team Spirit</td>            <td class="score"></td><td>Waterworks</td>              <td class="score"></td></tr>
       <tr><td>4</td><td>Tue 3/17</td><td>8:45 PM</td><td>BB2</td>    <td>Delta Constructors</td>     <td class="score"></td><td>Trash Pandas</td>            <td class="score"></td></tr>
 
       <!-- WEDNESDAY 3/18 -->
@@ -300,6 +304,7 @@
 
     </tbody>
   </table>
+  </div><!-- end .scroll-wrap -->
 
 
   <!-- ============================================================
