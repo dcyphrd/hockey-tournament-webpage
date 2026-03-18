@@ -123,14 +123,20 @@
   }
 
   /* ---- Schedule Table Column Widths ---- */
-  /* Tuned so all 8 columns fit without horizontal scrolling */
-  .awhl-bracket .sched-table { table-layout: fixed; width: 100%; }
+  /* min-width keeps columns readable; scroll-wrap handles overflow on narrow screens */
+  .awhl-bracket .sched-table { table-layout: fixed; width: 100%; min-width: 500px; }
   .awhl-bracket .sched-table .col-game  { width: 4%; }
   .awhl-bracket .sched-table .col-day   { width: 9%; }
   .awhl-bracket .sched-table .col-time  { width: 10%; }
   .awhl-bracket .sched-table .col-rink  { width: 7%; }
   .awhl-bracket .sched-table .col-team  { width: 25%; }
   .awhl-bracket .sched-table .col-score { width: 7%; }
+
+  /* Scroll wrapper — only the schedule table scrolls horizontally */
+  .awhl-bracket .scroll-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 
   /* Prevent the whole wrapper from causing horizontal scroll */
   .awhl-bracket { overflow-x: hidden; }
@@ -152,7 +158,7 @@
     font-size: 12px;
   }
   .awhl-bracket .stand-table .col-team { width: 26%; }
-  .awhl-bracket .stand-table .col-pts  { width: 8%; font-weight: bold; color: #0b2545; }
+  .awhl-bracket .stand-table .col-pts  { width: 8%; }
 
   /* ---- Playoff Boxes ---- */
   .awhl-bracket .playoff-box {
@@ -230,19 +236,15 @@
   @media (max-width: 540px) {
     .awhl-bracket h2  { font-size: 15px; }
     .awhl-bracket h3  { font-size: 12px; }
-    /* Shrink everything in the schedule table to fit 8 columns */
+    /* Schedule table scrolls, so font can stay comfortable */
     .awhl-bracket .sched-table th,
-    .awhl-bracket .sched-table td { font-size: 9px; padding: 4px 1px; }
-    /* Non-schedule tables can be a bit more generous */
+    .awhl-bracket .sched-table td { font-size: 10px; padding: 4px 2px; }
     .awhl-bracket .stand-table th,
     .awhl-bracket .stand-table td { font-size: 10px; padding: 4px 2px; }
     .awhl-bracket td.score { font-size: 12px; }
     .awhl-bracket .matchup-team  { font-size: 10px; padding: 6px 3px; }
     .awhl-bracket .matchup-score { font-size: 15px; width: 28px; }
     .awhl-bracket .playoff-title { font-size: 11px; }
-    /* Hide the rink column on very small screens to free up space */
-    .awhl-bracket .sched-table .col-rink,
-    .awhl-bracket .sched-table td:nth-child(4) { display: none; }
   }
 </style>
 
@@ -258,6 +260,7 @@
      Example:  <td class="score">4</td>
      ============================================================ -->
 <h3>Rec Game Schedule</h3>
+<div class="scroll-wrap">
 <table class="sched-table">
   <thead>
     <tr>
@@ -303,6 +306,7 @@
 
   </tbody>
 </table>
+</div><!-- end .scroll-wrap -->
 
 
 <!-- ============================================================
