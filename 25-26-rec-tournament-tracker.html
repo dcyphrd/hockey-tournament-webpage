@@ -2,10 +2,10 @@
   ============================================================
   AWHL REC TOURNAMENT BRACKET
   2025-26 Season
-  source: https://github.com/dcyphrd/hockey-tournament-webpage
+  https://github.com/dcyphrd/hockey-tournament-webpage
   ============================================================
 
-  yo diva! here's everything you need to know to update this page:
+  yo! here's everything you need to know to update this page:
 
   HOW THIS PAGE IS ORGANIZED:
     1. Game Schedule (top) — update scores as games finish
@@ -13,11 +13,10 @@
     3. Playoff Bracket (bottom) — fill in team names as they qualify, then scores
 
   HOW TO UPDATE SCORES IN THE SCHEDULE:
-    Find the game row and put the number between the empty <td></td> score cells.
-    Each team has one score cell. Before a game:
-      <td></td>
-    After a game (example: home team scored 4):
-      <td>4</td>
+    Find the game row. Each score cell looks like this:
+      <td class="score"></td>
+    Just put the number between the tags:
+      <td class="score">4</td>
 
   HOW TO UPDATE STANDINGS:
     Each row has cells for G1, G2, G3, G4 (points earned that game), PTS, GF, GA, and Place.
@@ -59,7 +58,8 @@
     color: #222;
     max-width: 100%;
     margin: 0 auto;
-    padding: 0 4px;
+    padding: 0 6px;
+    box-sizing: border-box;
   }
 
   /* ---- Headers ---- */
@@ -85,7 +85,7 @@
     font-size: 11px;
     color: #555;
     text-align: center;
-    margin: 4px 0 8px;
+    margin: 2px 0 10px;
     font-style: italic;
   }
 
@@ -93,7 +93,7 @@
   .awhl-bracket table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     table-layout: fixed;
   }
   .awhl-bracket th {
@@ -111,8 +111,16 @@
     font-size: 12px;
     word-wrap: break-word;
   }
-  .awhl-bracket tr:nth-child(even) { background: #f4f4f8; }
+  .awhl-bracket tr:nth-child(even) { background: #f0f4fa; }
   .awhl-bracket tr:nth-child(odd)  { background: #fff; }
+
+  /* Score cells — bold so goals pop */
+  .awhl-bracket td.score {
+    font-weight: bold;
+    font-size: 14px;
+    color: #222;
+    width: 38px;
+  }
 
   /* ---- Schedule Table Column Widths ---- */
   /* Tuned so all 8 columns fit without horizontal scrolling */
@@ -137,19 +145,21 @@
   }
 
   /* ---- Standings Table ---- */
-  .awhl-bracket .stand-table .col-team-s { width: 28%; }
   .awhl-bracket .stand-table td:first-child {
     text-align: left;
     padding-left: 6px;
     font-weight: bold;
+    font-size: 12px;
   }
+  .awhl-bracket .stand-table .col-team { width: 26%; }
+  .awhl-bracket .stand-table .col-pts  { width: 8%; font-weight: bold; color: #0b2545; }
 
   /* ---- Playoff Boxes ---- */
   .awhl-bracket .playoff-box {
     border: 2px solid #0f3460;
     border-radius: 6px;
-    padding: 8px;
-    margin: 8px 0;
+    padding: 10px;
+    margin: 10px 0;
     background: #f9f9ff;
   }
   .awhl-bracket .playoff-title {
@@ -162,14 +172,14 @@
   .awhl-bracket .playoff-detail {
     font-size: 11px;
     text-align: center;
-    color: #555;
-    margin-bottom: 4px;
+    color: #666;
+    margin-bottom: 8px;
   }
   .awhl-bracket .matchup {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
   }
   .awhl-bracket .matchup-team {
     flex: 1;
@@ -181,6 +191,7 @@
     font-size: 12px;
     min-width: 0;
     word-wrap: break-word;
+    color: #222;
   }
   /* Add class="winner" to the winning team's div to highlight them */
   .awhl-bracket .matchup-team.winner {
@@ -192,12 +203,14 @@
     text-align: center;
     font-weight: bold;
     font-size: 16px;
+    color: #222;
     flex-shrink: 0;
   }
   .awhl-bracket .matchup-vs {
     flex-shrink: 0;
     font-size: 11px;
     color: #888;
+    font-style: italic;
   }
 
   /* Gold border for the championship game */
@@ -205,24 +218,28 @@
     border: 3px solid #d4af37;
     background: #fffbe6;
   }
+  .awhl-bracket .champ-box .playoff-title { color: #0f3460; }
 
   /* Grey for the consolation game */
   .awhl-bracket .consolation-box {
-    border: 2px solid #888;
+    border: 2px solid #999;
     background: #f5f5f5;
   }
 
   /* ---- Mobile ---- */
-  @media (max-width: 500px) {
-    .awhl-bracket h2 { font-size: 16px; }
-    .awhl-bracket h3 { font-size: 13px; }
+  @media (max-width: 540px) {
+    .awhl-bracket h2  { font-size: 15px; }
+    .awhl-bracket h3  { font-size: 12px; }
     /* Shrink everything in the schedule table to fit 8 columns */
     .awhl-bracket .sched-table th,
     .awhl-bracket .sched-table td { font-size: 9px; padding: 4px 1px; }
     /* Non-schedule tables can be a bit more generous */
     .awhl-bracket .stand-table th,
     .awhl-bracket .stand-table td { font-size: 10px; padding: 4px 2px; }
-    .awhl-bracket .matchup-team { font-size: 11px; padding: 4px 2px; }
+    .awhl-bracket td.score { font-size: 12px; }
+    .awhl-bracket .matchup-team  { font-size: 10px; padding: 6px 3px; }
+    .awhl-bracket .matchup-score { font-size: 15px; width: 28px; }
+    .awhl-bracket .playoff-title { font-size: 11px; }
     /* Hide the rink column on very small screens to free up space */
     .awhl-bracket .sched-table .col-rink,
     .awhl-bracket .sched-table td:nth-child(4) { display: none; }
@@ -237,9 +254,8 @@
 
 <!-- ============================================================
      GAME SCHEDULE
-     HOW TO UPDATE: Find the game row, put the score in the empty <td></td> after the team name.
-     Example — before: <td>Fireweed</td><td></td>
-               after:  <td>Fireweed</td><td>4</td>
+     HOW TO UPDATE: Find the game row, put the score between the <td class="score"> tags.
+     Example:  <td class="score">4</td>
      ============================================================ -->
 <h3>Rec Game Schedule</h3>
 <table class="sched-table">
@@ -258,32 +274,32 @@
   <tbody>
 
     <!-- TUESDAY 3/17 — First puck drops! -->
-    <tr><td>1</td><td>Tue 3/17</td><td>5:30 PM</td><td>DA2</td><td>Weaver Brothers</td>    <td></td><td>Northern Lights</td>      <td></td></tr>
-    <tr><td>2</td><td>Tue 3/17</td><td>5:45 PM</td><td>DA1</td><td>Champions Choice</td>    <td></td><td>Rebound</td>              <td></td></tr>
-    <tr><td>3</td><td>Tue 3/17</td><td>7:00 PM</td><td>DA1</td><td>Play It Again Sports</td><td></td><td>Alpenglow</td>            <td></td></tr>
+    <tr><td>1</td><td>Tue 3/17</td><td>5:30 PM</td><td>DA2</td><td>Weaver Brothers</td>    <td class="score">3</td><td>Northern Lights</td>      <td class="score">2</td></tr>
+    <tr><td>2</td><td>Tue 3/17</td><td>5:45 PM</td><td>DA1</td><td>Champions Choice</td>    <td class="score">5</td><td>Rebound</td>              <td class="score">1</td></tr>
+    <tr><td>3</td><td>Tue 3/17</td><td>7:00 PM</td><td>DA1</td><td>Play It Again Sports</td><td class="score">3</td><td>Alpenglow</td>            <td class="score">1</td></tr>
 
     <!-- WEDNESDAY 3/18 -->
-    <tr><td>4</td><td>Wed 3/18</td><td>9:00 PM</td><td>UAA</td><td>Northern Lights</td>     <td></td><td>Fireweed</td>             <td></td></tr>
+    <tr><td>4</td><td>Wed 3/18</td><td>9:00 PM</td><td>UAA</td><td>Northern Lights</td>     <td class="score"></td><td>Fireweed</td>             <td class="score"></td></tr>
 
     <!-- THURSDAY 3/19 -->
-    <tr><td>5</td><td>Thu 3/19</td><td>5:30 PM</td><td>DA2</td><td>Alpenglow</td>           <td></td><td>Champions Choice</td>    <td></td></tr>
-    <tr><td>6</td><td>Thu 3/19</td><td>6:15 PM</td><td>BB2</td><td>Fireweed</td>            <td></td><td>Weaver Brothers</td>     <td></td></tr>
-    <tr><td>7</td><td>Thu 3/19</td><td>6:45 PM</td><td>DA2</td><td>Rebound</td>             <td></td><td>Play It Again Sports</td><td></td></tr>
+    <tr><td>5</td><td>Thu 3/19</td><td>5:30 PM</td><td>DA2</td><td>Alpenglow</td>           <td class="score"></td><td>Champions Choice</td>    <td class="score"></td></tr>
+    <tr><td>6</td><td>Thu 3/19</td><td>6:15 PM</td><td>BB2</td><td>Fireweed</td>            <td class="score"></td><td>Weaver Brothers</td>     <td class="score"></td></tr>
+    <tr><td>7</td><td>Thu 3/19</td><td>6:45 PM</td><td>DA2</td><td>Rebound</td>             <td class="score"></td><td>Play It Again Sports</td><td class="score"></td></tr>
 
     <!-- FRIDAY 3/20 -->
-    <tr><td>8</td><td>Fri 3/20</td><td>5:45 PM</td><td>UAA</td><td>Northern Lights</td>     <td></td><td>Weaver Brothers</td>     <td></td></tr>
+    <tr><td>8</td><td>Fri 3/20</td><td>5:45 PM</td><td>UAA</td><td>Northern Lights</td>     <td class="score"></td><td>Weaver Brothers</td>     <td class="score"></td></tr>
 
     <!-- SATURDAY 3/21 -->
-    <tr><td>9</td> <td>Sat 3/21</td><td>12:00 PM</td><td>DA2</td><td>Weaver Brothers</td>    <td></td><td>Fireweed</td>             <td></td></tr>
-    <tr><td>10</td><td>Sat 3/21</td><td>2:45 PM</td> <td>UAA</td><td>Champions Choice</td>   <td></td><td>Play It Again Sports</td><td></td></tr>
-    <tr><td>11</td><td>Sat 3/21</td><td>4:00 PM</td> <td>UAA</td><td>Rebound</td>            <td></td><td>Alpenglow</td>            <td></td></tr>
-    <tr><td>12</td><td>Sat 3/21</td><td>5:15 PM</td> <td>UAA</td><td>Fireweed</td>           <td></td><td>Northern Lights</td>      <td></td></tr>
+    <tr><td>9</td> <td>Sat 3/21</td><td>12:00 PM</td><td>DA2</td><td>Weaver Brothers</td>    <td class="score"></td><td>Fireweed</td>             <td class="score"></td></tr>
+    <tr><td>10</td><td>Sat 3/21</td><td>2:45 PM</td> <td>UAA</td><td>Champions Choice</td>   <td class="score"></td><td>Play It Again Sports</td><td class="score"></td></tr>
+    <tr><td>11</td><td>Sat 3/21</td><td>4:00 PM</td> <td>UAA</td><td>Rebound</td>            <td class="score"></td><td>Alpenglow</td>            <td class="score"></td></tr>
+    <tr><td>12</td><td>Sat 3/21</td><td>5:15 PM</td> <td>UAA</td><td>Fireweed</td>           <td class="score"></td><td>Northern Lights</td>      <td class="score"></td></tr>
 
     <!-- SUNDAY 3/22 — Playoff games! Replace placeholder names with real teams once division play wraps up. -->
-    <tr class="playoff-row"><td><b>13</b></td><td>Sun 3/22</td><td>8:30 AM</td> <td>UAA</td><td>1st Place American</td><td></td><td>2nd Place National</td><td></td></tr>
-    <tr class="playoff-row"><td><b>14</b></td><td>Sun 3/22</td><td>10:00 AM</td><td>UAA</td><td>1st Place National</td><td></td><td>2nd Place American</td><td></td></tr>
-    <tr class="playoff-row"><td><b>15</b></td><td>Sun 3/22</td><td>11:30 AM</td><td>UAA</td><td>3rd Place National</td><td></td><td>4th Place National</td><td></td></tr>
-    <tr class="playoff-row"><td><b>16</b></td><td>Sun 3/22</td><td>5:00 PM</td> <td>DA1</td><td>Winner SF #1</td>       <td></td><td>Winner SF #2</td>       <td></td></tr>
+    <tr class="playoff-row"><td><b>13</b></td><td>Sun 3/22</td><td>8:30 AM</td> <td>UAA</td><td>1st Place American</td><td class="score"></td><td>2nd Place National</td><td class="score"></td></tr>
+    <tr class="playoff-row"><td><b>14</b></td><td>Sun 3/22</td><td>10:00 AM</td><td>UAA</td><td>1st Place National</td><td class="score"></td><td>2nd Place American</td><td class="score"></td></tr>
+    <tr class="playoff-row"><td><b>15</b></td><td>Sun 3/22</td><td>11:30 AM</td><td>UAA</td><td>3rd Place National</td><td class="score"></td><td>4th Place National</td><td class="score"></td></tr>
+    <tr class="playoff-row"><td><b>16</b></td><td>Sun 3/22</td><td>5:00 PM</td> <td>DA1</td><td>Winner SF #1</td>       <td class="score"></td><td>Winner SF #2</td>       <td class="score"></td></tr>
 
   </tbody>
 </table>
@@ -300,16 +316,16 @@
 <table class="stand-table">
   <thead>
     <tr>
-      <th class="col-team-s">Team</th>
+      <th class="col-team">Team</th>
       <th>G1</th><th>G2</th><th>G3</th><th>G4</th>
-      <th>PTS</th><th>GF</th><th>GA</th><th>Place</th>
+      <th class="col-pts">PTS</th><th>GF</th><th>GA</th><th>Place</th>
     </tr>
   </thead>
   <tbody>
     <!-- Update after each game! -->
     <tr><td>Fireweed</td>       <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
     <tr><td>Northern Lights</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Weaver Brothers</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Weaver Brothers</td><td>2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
   </tbody>
 </table>
 
@@ -325,16 +341,16 @@
 <table class="stand-table">
   <thead>
     <tr>
-      <th class="col-team-s">Team</th>
+      <th class="col-team">Team</th>
       <th>G1</th><th>G2</th><th>G3</th><th>G4</th>
-      <th>PTS</th><th>GF</th><th>GA</th><th>Place</th>
+      <th class="col-pts">PTS</th><th>GF</th><th>GA</th><th>Place</th>
     </tr>
   </thead>
   <tbody>
     <!-- Update after each game! G4 will stay blank since National only plays 3 games each. -->
     <tr><td>Alpenglow</td>          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Champions Choice</td>   <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Play It Again Sports</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Champions Choice</td>   <td>2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Play It Again Sports</td><td>2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
     <tr><td>Rebound</td>            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
   </tbody>
 </table>
