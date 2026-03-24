@@ -6,7 +6,7 @@ HTML bracket and standings pages for the Anchorage Women's Hockey League (AWHL) 
 
 ## What's in this repo
 
-Each skill level gets **two pages**: a division header and a full tournament tracker.
+Each skill level gets **two pages**: a division header and a full tournament tracker. There's also a **winner banner** that can be added to either level's page after the championship game.
 
 | File | Purpose |
 |------|---------|
@@ -14,6 +14,7 @@ Each skill level gets **two pages**: a division header and a full tournament tra
 | `XX-XX-rec-tournament-tracker.html` | **Rec tournament tracker** — full game schedule, division standings tables, and playoff bracket boxes. This is the main working page you update throughout the week. |
 | `XX-XX-int-brackets.html` | **Intermediate division header** — same idea as Rec, for the Intermediate level. |
 | `XX-XX-int-tournament-tracker.html` | **Intermediate tournament tracker** — full schedule, standings, and playoff bracket for Intermediate. |
+| `XX-XX-winner-banner.html` | **Championship winner banner** — a standalone banner showing the tournament champion, final score, and game details. Paste above or below the tracker on the Sports Engine page after the championship game. |
 
 The `XX-XX` prefix is the season (e.g., `25-26` for the 2025–26 season). Rename files each year.
 
@@ -34,13 +35,14 @@ That's it; the HTML includes all its own CSS styling inline, so there are no ext
 
 ### Step 1: Copy last season's files
 
-Duplicate all four files and rename them with the new season prefix:
+Duplicate all five files and rename them with the new season prefix:
 
 ```
 25-26-rec-tournament-brackets.html    -->  26-27-rec-tournament-brackets.html
 25-26-rec-tournament-tracker.html     -->  26-27-rec-tournament-tracker.html
 25-26-int-brackets.html               -->  26-27-int-brackets.html
 25-26-int-tournament-tracker.html     -->  26-27-int-tournament-tracker.html
+25-26-winner-banner.html              -->  26-27-winner-banner.html
 ```
 
 ### Step 2: Update the division header files
@@ -133,6 +135,17 @@ The Rec and Intermediate levels may not have the same number of teams each year.
 - **Schedule rows:** More teams = more games. Count carefully.
 - **Consolation game:** This typically comes from the division with 4+ teams (3rd vs 4th place). If both divisions are small, you may not need a consolation game.
 
+### Step 5: Update the winner banner file
+
+The winner banner is a small standalone HTML block that you paste into the Sports Engine page after the championship game is played. For the new season, open the file and reset it:
+
+- **Label text:** Update the year and skill level in the `<div class="label">` (e.g., "2027 AWHL Int Tournament Champions").
+- **Team name:** Replace the team name in `<div class="team-name">` with a placeholder like "TBD" until the championship is decided.
+- **Details:** Update the date in `<div class="details">` to match the new season's championship game day.
+- **Score line:** Clear the score in `<div class="score-line">` or set it to a placeholder.
+
+You can duplicate this file if you want separate banners for Rec and Intermediate champions. Just make sure each one has the correct skill level in the label text.
+
 ---
 
 ## How to update scores during the tournament
@@ -191,6 +204,7 @@ This turns the winner's box dark navy with white text (or gold-bordered for the 
 | `.awhl-header` | Division header pages (both Rec and Int) |
 | `.awhl-bracket` | Rec tournament tracker |
 | `.awhl-int` | Intermediate tournament tracker |
+| `.champ-banner` | Winner banner |
 
 ### Key style classes
 | Class | What it does |
@@ -250,7 +264,7 @@ If you want to change the color scheme, search-and-replace these hex values acro
 1. **Before the tournament:** Set up new season files following the steps above. Paste into Sports Engine pages. Test on desktop and mobile.
 2. **During the tournament (Tue–Sat):** After each game, update scores in the schedule and standings directly in Sports Engine's HTML editor. No need to touch GitHub.
 3. **After division play (Saturday night):** Calculate final standings, fill in playoff bracket team names.
-4. **Playoff day (Sunday):** Update scores and add `winner` classes as games finish.
+4. **Playoff day (Sunday):** Update scores and add `winner` classes as games finish. After the championship, update the winner banner file and paste it into the Sports Engine page.
 5. **After the tournament:** Copy the final HTML from Sports Engine back into the repo files and commit, so you have a clean archive of the completed bracket.
 
 ---
@@ -264,9 +278,11 @@ awhl-tournament-brackets/
 ├── 25-26-rec-tournament-tracker.html
 ├── 25-26-int-brackets.html
 ├── 25-26-int-tournament-tracker.html
+├── 25-26-winner-banner.html
 ├── 26-27-rec-tournament-brackets.html      (next season)
 ├── 26-27-rec-tournament-tracker.html
 ├── 26-27-int-brackets.html
 ├── 26-27-int-tournament-tracker.html
+├── 26-27-winner-banner.html
 └── ...
 ```
