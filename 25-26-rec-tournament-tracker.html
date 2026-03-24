@@ -1,6 +1,6 @@
 <!--
   ============================================================
-  AWHL REC TOURNAMENT BRACKET
+  AWHL REC TOURNAMENT TRACKER
   2025-26 Season
   https://github.com/dcyphrd/hockey-tournament-webpage
   ============================================================
@@ -160,6 +160,20 @@
   .awhl-bracket .stand-table .col-team { width: 26%; }
   .awhl-bracket .stand-table .col-pts  { width: 8%; }
 
+  /* Place column — bold so final standings pop */
+  .awhl-bracket .stand-table td:last-child {
+    font-weight: bold;
+    font-size: 14px;
+    color: #222;
+  }
+
+  /* PTS column — heavier border to show what drives placement */
+  .awhl-bracket .stand-table th:nth-last-child(4),
+  .awhl-bracket .stand-table td:nth-last-child(4) {
+    border-left: 2px solid #0f3460;
+    border-right: 2px solid #0f3460;
+  }
+
   /* ---- Playoff Boxes ---- */
   .awhl-bracket .playoff-box {
     border: 2px solid #0f3460;
@@ -282,27 +296,27 @@
     <tr><td>3</td><td>Tue 3/17</td><td>7:00 PM</td><td>DA1</td><td>Play It Again Sports</td><td class="score">3</td><td>Alpenglow</td>            <td class="score">1</td></tr>
 
     <!-- WEDNESDAY 3/18 -->
-    <tr><td>4</td><td>Wed 3/18</td><td>9:00 PM</td><td>UAA</td><td>Northern Lights</td>     <td class="score"></td><td>Fireweed</td>             <td class="score"></td></tr>
+    <tr><td>4</td><td>Wed 3/18</td><td>9:00 PM</td><td>UAA</td><td>Northern Lights</td>     <td class="score">1</td><td>Fireweed</td>             <td class="score">2</td></tr>
 
     <!-- THURSDAY 3/19 -->
-    <tr><td>5</td><td>Thu 3/19</td><td>5:30 PM</td><td>DA2</td><td>Alpenglow</td>           <td class="score"></td><td>Champions Choice</td>    <td class="score"></td></tr>
-    <tr><td>6</td><td>Thu 3/19</td><td>6:15 PM</td><td>BB2</td><td>Fireweed</td>            <td class="score"></td><td>Weaver Brothers</td>     <td class="score"></td></tr>
-    <tr><td>7</td><td>Thu 3/19</td><td>6:45 PM</td><td>DA2</td><td>Rebound</td>             <td class="score"></td><td>Play It Again Sports</td><td class="score"></td></tr>
+    <tr><td>5</td><td>Thu 3/19</td><td>5:30 PM</td><td>DA2</td><td>Alpenglow</td>           <td class="score">1</td><td>Champions Choice</td>    <td class="score">2</td></tr>
+    <tr><td>6</td><td>Thu 3/19</td><td>6:15 PM</td><td>BB2</td><td>Fireweed</td>            <td class="score">0</td><td>Weaver Brothers</td>     <td class="score">1</td></tr>
+    <tr><td>7</td><td>Thu 3/19</td><td>6:45 PM</td><td>DA2</td><td>Rebound</td>             <td class="score">0</td><td>Play It Again Sports</td><td class="score">5</td></tr>
 
     <!-- FRIDAY 3/20 -->
-    <tr><td>8</td><td>Fri 3/20</td><td>5:45 PM</td><td>UAA</td><td>Northern Lights</td>     <td class="score"></td><td>Weaver Brothers</td>     <td class="score"></td></tr>
+    <tr><td>8</td><td>Fri 3/20</td><td>5:45 PM</td><td>UAA</td><td>Northern Lights</td>     <td class="score">3</td><td>Weaver Brothers</td>     <td class="score">5</td></tr>
 
     <!-- SATURDAY 3/21 -->
-    <tr><td>9</td> <td>Sat 3/21</td><td>12:00 PM</td><td>DA2</td><td>Weaver Brothers</td>    <td class="score"></td><td>Fireweed</td>             <td class="score"></td></tr>
-    <tr><td>10</td><td>Sat 3/21</td><td>2:45 PM</td> <td>UAA</td><td>Champions Choice</td>   <td class="score"></td><td>Play It Again Sports</td><td class="score"></td></tr>
-    <tr><td>11</td><td>Sat 3/21</td><td>4:00 PM</td> <td>UAA</td><td>Rebound</td>            <td class="score"></td><td>Alpenglow</td>            <td class="score"></td></tr>
-    <tr><td>12</td><td>Sat 3/21</td><td>5:15 PM</td> <td>UAA</td><td>Fireweed</td>           <td class="score"></td><td>Northern Lights</td>      <td class="score"></td></tr>
+    <tr><td>9</td> <td>Sat 3/21</td><td>12:00 PM</td><td>DA2</td><td>Weaver Brothers</td>    <td class="score">1</td><td>Fireweed</td>             <td class="score">0</td></tr>
+    <tr><td>10</td><td>Sat 3/21</td><td>2:45 PM</td> <td>UAA</td><td>Champions Choice</td>   <td class="score">2</td><td>Play It Again Sports</td><td class="score">0</td></tr>
+    <tr><td>11</td><td>Sat 3/21</td><td>4:00 PM</td> <td>UAA</td><td>Rebound</td>            <td class="score">1</td><td>Alpenglow</td>            <td class="score">0</td></tr>
+    <tr><td>12</td><td>Sat 3/21</td><td>5:15 PM</td> <td>UAA</td><td>Fireweed</td>           <td class="score">2</td><td>Northern Lights</td>      <td class="score">1</td></tr>
 
     <!-- SUNDAY 3/22 — Playoff games! Replace placeholder names with real teams once division play wraps up. -->
-    <tr class="playoff-row"><td><b>13</b></td><td>Sun 3/22</td><td>8:30 AM</td> <td>UAA</td><td>1st Place American</td><td class="score"></td><td>2nd Place National</td><td class="score"></td></tr>
-    <tr class="playoff-row"><td><b>14</b></td><td>Sun 3/22</td><td>10:00 AM</td><td>UAA</td><td>1st Place National</td><td class="score"></td><td>2nd Place American</td><td class="score"></td></tr>
-    <tr class="playoff-row"><td><b>15</b></td><td>Sun 3/22</td><td>11:30 AM</td><td>UAA</td><td>3rd Place National</td><td class="score"></td><td>4th Place National</td><td class="score"></td></tr>
-    <tr class="playoff-row"><td><b>16</b></td><td>Sun 3/22</td><td>5:00 PM</td> <td>DA1</td><td>Winner SF #1</td>       <td class="score"></td><td>Winner SF #2</td>       <td class="score"></td></tr>
+    <tr class="playoff-row"><td><b>13</b></td><td>Sun 3/22</td><td>8:30 AM</td> <td>UAA</td><td>Weaver Brothers</td><td class="score">0</td><td>Play It Again Sports</td><td class="score">1</td></tr>
+    <tr class="playoff-row"><td><b>14</b></td><td>Sun 3/22</td><td>10:00 AM</td><td>UAA</td><td>Champion's Choice</td><td class="score">1</td><td>Fireweed</td><td class="score">0</td></tr>
+    <tr class="playoff-row"><td><b>15</b></td><td>Sun 3/22</td><td>11:30 AM</td><td>UAA</td><td>Rebound</td><td class="score">1</td><td>Alpenglow</td><td class="score">0</td></tr>
+    <tr class="playoff-row"><td><b>16</b></td><td>Sun 3/22</td><td>5:00 PM</td> <td>DA1</td><td>Play It Again Sports</td>       <td class="score">0</td><td>Champion's Choice</td>       <td class="score">1</td></tr>
 
   </tbody>
 </table>
@@ -327,9 +341,9 @@
   </thead>
   <tbody>
     <!-- Update after each game! -->
-    <tr><td>Fireweed</td>       <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Northern Lights</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Weaver Brothers</td><td>2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Fireweed</td>       <td>2</td><td>0</td><td>0</td><td>2</td><td>4</td><td>4</td><td>4</td><td>2</td></tr>
+    <tr><td>Northern Lights</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>7</td><td>12</td><td>3</td></tr>
+    <tr><td>Weaver Brothers</td><td>2</td><td>2</td><td>2</td><td>2</td><td>8</td><td>10</td><td>5</td><td>1</td></tr>
   </tbody>
 </table>
 
@@ -346,16 +360,16 @@
   <thead>
     <tr>
       <th class="col-team">Team</th>
-      <th>G1</th><th>G2</th><th>G3</th><th>G4</th>
+      <th>G1</th><th>G2</th><th>G3</th>
       <th class="col-pts">PTS</th><th>GF</th><th>GA</th><th>Place</th>
     </tr>
   </thead>
   <tbody>
-    <!-- Update after each game! G4 will stay blank since National only plays 3 games each. -->
-    <tr><td>Alpenglow</td>          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Champions Choice</td>   <td>2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Play It Again Sports</td><td>2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Rebound</td>            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <!-- Update after each game! -->
+    <tr><td>Alpenglow</td>          <td>0</td><td>0</td><td>0</td><td>0</td><td>2</td><td>6</td><td>4</td></tr>
+    <tr><td>Champions Choice</td>   <td>2</td><td>2</td><td>2</td><td>6</td><td>9</td><td>2</td><td>1</td></tr>
+    <tr><td>Play It Again Sports</td><td>2</td><td>2</td><td>0</td><td>4</td><td>8</td><td>3</td><td>2</td></tr>
+    <tr><td>Rebound</td>            <td>0</td><td>0</td><td>2</td><td>2</td><td>2</td><td>10</td><td>3</td></tr>
   </tbody>
 </table>
 
@@ -377,11 +391,11 @@
   <div class="playoff-detail">8:30 AM &bull; UAA</div>
   <div class="matchup">
     <!-- Replace "1st Place American" with the actual team name when known -->
-    <div class="matchup-team">1st Place American</div>
-    <div class="matchup-score"></div><!-- put score here, like: 4 -->
+    <div class="matchup-team">Weaver Brothers</div>
+    <div class="matchup-score">0</div><!-- put score here, like: 4 -->
     <div class="matchup-vs">vs</div>
-    <div class="matchup-score"></div><!-- put score here -->
-    <div class="matchup-team">2nd Place National</div>
+    <div class="matchup-score">1</div><!-- put score here -->
+    <div class="matchup-team winner">Play It Again Sports</div>
   </div>
 </div>
 
@@ -390,11 +404,11 @@
   <div class="playoff-title">Game 14: Semi-Final #2</div>
   <div class="playoff-detail">10:00 AM &bull; UAA</div>
   <div class="matchup">
-    <div class="matchup-team">1st Place National</div>
-    <div class="matchup-score"></div>
+    <div class="matchup-team winner">Champion's Choice</div>
+    <div class="matchup-score">1</div>
     <div class="matchup-vs">vs</div>
-    <div class="matchup-score"></div>
-    <div class="matchup-team">2nd Place American</div>
+    <div class="matchup-score">0</div>
+    <div class="matchup-team">Fireweed</div>
   </div>
 </div>
 
@@ -403,11 +417,11 @@
   <div class="playoff-title">Game 15: Consolation</div>
   <div class="playoff-detail">11:30 AM &bull; UAA</div>
   <div class="matchup">
-    <div class="matchup-team">3rd Place National</div>
-    <div class="matchup-score"></div>
+    <div class="matchup-team winner">Rebound</div>
+    <div class="matchup-score">1</div>
     <div class="matchup-vs">vs</div>
-    <div class="matchup-score"></div>
-    <div class="matchup-team">4th Place National</div>
+    <div class="matchup-score">0</div>
+    <div class="matchup-team">Alpenglow</div>
   </div>
 </div>
 
@@ -416,11 +430,11 @@
   <div class="playoff-title">&#127942; Game 16: Championship</div>
   <div class="playoff-detail">5:00 PM &bull; DA1</div>
   <div class="matchup">
-    <div class="matchup-team">Winner SF #1</div>
-    <div class="matchup-score"></div>
+    <div class="matchup-team">Play It Again Sports</div>
+    <div class="matchup-score">0</div>
     <div class="matchup-vs">vs</div>
-    <div class="matchup-score"></div>
-    <div class="matchup-team">Winner SF #2</div>
+    <div class="matchup-score">1</div>
+    <div class="matchup-team winner">Champion's Choice</div>
   </div>
 </div>
 
