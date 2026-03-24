@@ -1,0 +1,53 @@
+<style>
+  .champ-banner {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    background: #1a1a2e;
+    border: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 12px;
+    margin: 0 auto 16px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .champ-banner .trophy {
+    font-size: 40px;
+    margin-bottom: 4px;
+  }
+  .champ-banner .label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #d4af37;
+    margin-bottom: 4px;
+  }
+  .champ-banner .team-name {
+    font-size: 26px;
+    font-weight: bold;
+    color: #fff;
+    margin: 4px 0;
+  }
+  .champ-banner .details {
+    font-size: 12px;
+    color: #aab;
+    margin-top: 6px;
+  }
+  .champ-banner .score-line {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 4px 14px;
+    border: 1px solid #d4af37;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #d4af37;
+  }
+</style>
+
+<div class="champ-banner">
+  <div class="trophy">&#127942;</div>
+  <div class="label">2026 AWHL Int Tournament Champions</div>
+  <div class="team-name">Delta Constructors</div>
+  <div class="details">Championship Game &#8226; Sunday, March 22 &#8226; DA1</div>
+  <div class="score-line">Delta Constructors 4 &#8211; Pioneer Peak 3</div>
+</div>
